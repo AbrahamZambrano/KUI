@@ -1,35 +1,53 @@
 # KUI App (Kubernetes User Interface)
 
 
-## Instalacion de python, poetry, etc..
+## Instalaciones 💻
 
-```
-pip install "cualquier libreria"
-```
-
+- Poetry
 ```
 poetry install
 ```
 
+- Python3 y pip
 ```
-sudo apt-get install python3-pip
+apt-get install python3-pip
 ```
 
+- Librerias
+```
+pip install "cualquier libreria"
+```
+
+- Nautilus
+```
+apt-get install nautilus
+```
+
+- Saber la version de Python
 ```
 python --version
 ```
+---
 
-```
-sudo apt-get install nautilus
-```
+## Instalacion para crear contenedores 📦
 
-## Cómo usar este programa
+- [Docker](https://help.wnpower.com/hc/es/articles/360048910771-C%C3%B3mo-instalar-Docker-en-tu-servidor-con-Ubuntu)
+
+- [Go](https://ubunlog.com/go-instala-este-lenguaje-de-programacion-ubuntu-20-04/)
+
+- [Kind](https://kind.sigs.k8s.io/)
+
+---
+
+## Cómo usar este programa ⚙️
 
 ```
 poetry run "./carpeta/Lo que sea"
 ```
 
-## Solucion de posibles errores
+---
+
+## Solucion de posibles errores 🎊
 
 ```
 python3 -m pip install --upgrade requests
@@ -38,11 +56,13 @@ python3 -m pip install --upgrade requests
 ```
 pip install requests
 ```
+
 - Problemas con el [PATH](https://askubuntu.com/questions/250929/pythonpath-environment-variable)
 - Problemas con [RequestsDependencyWarning](https://stackoverflow.com/questions/50202238/python-pip-requestsdependencywarning-urllib3-1-9-1-or-chardet-2-3-0-doe)
 
+---
 
-## Funcionalidades
+## Funcionalidades 🎞️
 
 La mayoría está WIP
 
@@ -72,7 +92,7 @@ Librerias que podrian interesar
 
 ---
 
-## Diario
+## Diario 📓
 
 - Dia 28/10/2022
 
