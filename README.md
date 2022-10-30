@@ -102,4 +102,20 @@ Realizado varias busquedas y pensamiento de como va a ser la aplicacion, tambien
 
 ![Descripcion de la App](./img/UserInterface.jpeg)
 
+---
+
+- Dia 30/10/2022
+
+Para hacer los commandos desde el WSL tengo que utilizar service.
+
+- Comandos interesantes para docker 
+    - docker run
+    - service docker start/status/stop/restart
+    - docker info 
+
+- Intalacion go [aquí](https://tecadmin.net/how-to-install-go-on-ubuntu-20-04/).
+
+- Comandos para clusters [aquí](https://kind.sigs.k8s.io/).
+  
+
 
