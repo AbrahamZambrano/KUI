@@ -118,4 +118,8 @@ Para hacer los commandos desde el WSL tengo que utilizar service.
 - Comandos para clusters [aquí](https://kind.sigs.k8s.io/).
   
 
+- Dia 31/10/2022
+
+Documentacion de [kubernetes](https://kubernetes.io/es/docs/_print/).
+
 
