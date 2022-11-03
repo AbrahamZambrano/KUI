@@ -122,4 +122,10 @@ Para hacer los commandos desde el WSL tengo que utilizar service.
 
 Documentacion de [kubernetes](https://kubernetes.io/es/docs/_print/).
 
+- Dia 03/11/2022
+
+Comandos [kubectl](https://geekflare.com/es/kubectl-examples/).
+
+Configuracion [Kind](https://kind.sigs.k8s.io/docs/user/configuration/).
+
 
