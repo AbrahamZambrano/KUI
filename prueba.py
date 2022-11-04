@@ -1,5 +1,5 @@
 from textual.app import App, ComposeResult
-from textual.containers import Container
+from textual.containers import Container, Horizontal
 from textual.widgets import Button, Header, Footer, Static
 import re
 import subprocess
@@ -22,29 +22,39 @@ def get_namespaces() -> list:
     return res
 
 
-def pods(contenedor: str) -> str:
-    pods = subprocess.run(["kubectl", "get", "pods", "-n", contenedor], stdout=subprocess.PIPE).stdout.decode('utf-8')
+class NamespacesWidget(Static):
+    """A Namespaces widget."""
+    def compose(self) -> ComposeResult:
+        """Create child widgets of namespaces."""
+        yield Static("Namespaces", id="namespacesMessage")
+        for namespace in get_namespaces():
+            yield Button(namespace, id=namespace)
+
+
+
+def get_pods(contenedor: str) -> str:
+    pods = subprocess.run(["kubectl", "get", "pods", "-n", contenedor], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
     return pods
 
 
-class NamespacesWidget(Static):
-    """A stopwatch widget."""
-    def compose(self) -> ComposeResult:
-        """Create child widgets of a stopwatch."""
-        for namespace in get_namespaces():
-            yield Button(namespace, id=namespace)
+
+class PodsWidgets(Static):
+    """A Pods widget."""""
 
 
 class KUIAppUI(App):
     """A Textual app to manage stopwatches."""
 
     BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
+    CSS_PATH = "styles.css"
+
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
         yield Header()
         yield Footer()
-        yield Container(NamespacesWidget())
+        self.podsWidget = PodsWidgets("", id="podsWidget") 
+        yield Container(NamespacesWidget(renderable="namespaces"), self.podsWidget)
 
     def action_toggle_dark(self) -> None:
         """An action to toggle dark mode."""
@@ -53,7 +63,8 @@ class KUIAppUI(App):
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Event handler called when a button is pressed."""
         container = event.button.id
-        pod_info = pods(container)
+        pod_info = get_pods(container)
+        self.podsWidget.update( pod_info)
 
 
 

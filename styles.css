@@ -1,0 +1,16 @@
+KUIAppUI {
+    layout: horizontal;
+}
+
+PodsWidget {
+    content-align: center middle
+}
+
+#podsWidget {
+    dock: right
+}
+
+#namespacesMessage {
+    content-align: center middle;
+    text-style: bold
+}
