@@ -2,11 +2,15 @@ from rich.table import Table
 
 from textual.app import App, ComposeResult
 from textual.widgets import Static
+from textual.containers import Container
+from textual.widgets import Button, Header, Footer, Static
+
 import delegator
+
 
 class FizzBuzz(Static):
     def on_mount(self) -> None:
-        namespaces_raw = delegator.run('kubectl get namespaces') 
+        namespaces_raw = delegator.run('kubectl get namespaces')
         namespaces_info=namespaces_raw.out.split("\n")[1:]
 
         current_namespaces = list()
