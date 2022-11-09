@@ -14,3 +14,25 @@ PodsWidget {
     content-align: center middle;
     text-style: bold
 }
+
+#main_window {
+    layout: grid;
+    grid-size: 3 1
+}
+
+#pods_widget {
+    
+}
+
+#logs_widget {
+    border: solid green
+}
+
+#namespaces_widget {
+    border: solid blue
+}
+
+#pods_widget_header {
+    layout: grid;
+    grid_size: 5 1
+}
