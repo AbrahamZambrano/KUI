@@ -17,7 +17,7 @@ PodsWidget {
 
 #main_window {
     layout: grid;
-    grid-size: 3 1
+    grid-size: 3 1;
 }
 
 #pods_widget {
@@ -29,10 +29,16 @@ PodsWidget {
 }
 
 #namespaces_widget {
-    border: solid blue
+    border: solid blue;
+
 }
 
 #pods_widget_header {
     layout: grid;
-    grid_size: 5 1
+    grid_size: 5 1;
+}
+
+
+#pods_row_container{
+    position: relative;
 }

@@ -21,6 +21,17 @@ class NamespacesWidget(Static):
 
         yield contenedor
 
+class PodRow(Static):
+    def compose() -> ComposeResult:
+        yield Button("coredns-565d847f94-4rspf")
+        yield Static("1/1")
+        yield Static("Running")
+        yield Static("8 (68m ago)")
+        yield Static("11d")
+
+
+
+
 class PodsWidgets(Static):
     """A Pods widget."""""
     def compose(self, id = None, *args, **kwargs) -> ComposeResult:
@@ -28,16 +39,18 @@ class PodsWidgets(Static):
             Static("NAME"),
             Static("READY"),
             Static("STATUS"),
-            Static("READY"), 
+            Static("RESTARTS"), 
             Static("AGE"),
             id = "pods_widget_header"
         )
         self.pods_rows = Container(
-            Static("Escoge un namespace", classes="remove"),
-            id="pods_row_container"
+            # Los pods que tengas en total
+            # PodRow(),
+            
         )
 
-        yield Container(self.headers, self.pods_rows)
+        yield Container(self.headers, self.pods_rows,
+        )
 
 
 
@@ -78,16 +91,24 @@ class KUIAppUI(App):
 
         if KUIAppUI.NAMESPACE_BUTTON_CLASS in event.button.classes:
             pods = get_pods(id)
+            #Converitr la lista en un string
+            pods_list = ' '.join(map(str,pods))
+            ########################################################
             self.podsWidget.pods_rows.add_class("remove")
             self.podsWidget.pods_rows.mount(Container(
-                Static(pods), 
+                Static(pods_list), 
                 id = "pods_row_container"
-            ))
+            )
+        )
 
-
+    #Intento de hacer un boton de exit
+    class Exit(Static):
+        """A button to exit"""
+        def compose(self) -> ComposeResult:
+            yield Button("Exit", id="exit")
 
 if __name__ == "__main__":
-    get_pods_names("kube-system")
+    get_pods_names("")
     app = KUIAppUI()
     namespace = NamespacesWidget()
     app.run()

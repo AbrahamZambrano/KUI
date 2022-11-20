@@ -13,7 +13,9 @@ def get_namespaces() -> list:
 
 
 def get_pods(contenedor: str) -> str:
-    pods = subprocess.run(["kubectl", "get", "pods", "-n", contenedor], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
+    raw_pods = subprocess.run(["kubectl", "get", "pods", "-n", contenedor], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
+    pods = raw_pods.split("\n")
+    pods = list(filter(None, pods))
     return pods    
 
 def get_pods_names(contenedor: str) -> str:
