@@ -21,11 +21,12 @@ PodsWidget {
 }
 
 #pods_widget {
-    
+    border: solid red;
 }
 
 #logs_widget {
-    border: solid green
+    border: solid green;
+    width: 20%;
 }
 
 #namespaces_widget {
@@ -34,11 +35,14 @@ PodsWidget {
 }
 
 #pods_widget_header {
-    layout: grid;
-    grid_size: 5 1;
+    layout: horizontal;
+    content-align: center middle;
+    height: 3;
 }
-
+/*
 
 #pods_row_container{
-    position: relative;
+    
 }
+
+*/

@@ -2,7 +2,7 @@ from commands import *
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal
 from textual.widgets import Button, Header, Footer, Static
-
+from subprocess import PIPE
 
 class NamespacesWidget(Static):
     """A Namespaces widget."""
@@ -21,13 +21,14 @@ class NamespacesWidget(Static):
 
         yield contenedor
 
-class PodRow(Static):
-    def compose() -> ComposeResult:
-        yield Button("coredns-565d847f94-4rspf")
-        yield Static("1/1")
-        yield Static("Running")
-        yield Static("8 (68m ago)")
-        yield Static("11d")
+
+#class PodRow(Static):
+#    def compose() -> ComposeResult:
+#        yield Button("coredns-565d847f94-4rspf")
+#        yield Static("1/1")
+#        yield Static("Running")
+#        yield Static("8 (68m ago)")
+#        yield Static("11d")
 
 
 
@@ -54,6 +55,7 @@ class PodsWidgets(Static):
 
 
 
+
 class LogsWidget(Static):
     container = ""
     pod = ""
@@ -61,9 +63,10 @@ class LogsWidget(Static):
 class KUIAppUI(App):
     """A Textual app to manage stopwatches."""
 
-    BINDINGS = [("d", "toggle_dark", "Toggle dark mode")]
+    BINDINGS = [("d", "toggle_dark", "Toggle dark mode"),("e", "button_exit", "Exit"),("p","new_plots", "Plots"),("t","new_terminal","New Terminal")]
     CSS_PATH = "../styles.css"
     NAMESPACE_BUTTON_CLASS = "button_namespaces"
+    PODS_BUTTON_CLAS = "button_pods"
 
 
     def compose(self) -> ComposeResult:
@@ -80,11 +83,25 @@ class KUIAppUI(App):
             self.logsWidget,
             id = "main_window"
         )
+        
 
     def action_toggle_dark(self) -> None:
         """An action to toggle dark mode."""
         self.dark = not self.dark
-    
+
+    def action_button_exit(self) -> None:   
+        """An action to exit."""        
+        self.exit()
+
+    def action_new_plots(self) -> None:
+        """An action to open plots."""
+        subprocess.run("gnome-terminal -- bash -c '/bin/python3 /mnt/c/Users/abrah/Desktop/KUIApp/kuiapp/plots; exec bash -i'",stdout=PIPE,stderr=PIPE,shell=True)
+
+    def action_new_terminal(self) -> None:
+        """An action to open a new CL."""
+        subprocess.run("gnome-terminal -- bash",stdout=PIPE,stderr=PIPE,shell=True)
+
+
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Event handler called when a button is pressed."""
         id = event.button.id
@@ -101,11 +118,7 @@ class KUIAppUI(App):
             )
         )
 
-    #Intento de hacer un boton de exit
-    class Exit(Static):
-        """A button to exit"""
-        def compose(self) -> ComposeResult:
-            yield Button("Exit", id="exit")
+
 
 if __name__ == "__main__":
     get_pods_names("")
