@@ -11,9 +11,11 @@ class NamespacesWidget(Static):
     def compose(self, id = None, *args, **kwargs) -> ComposeResult:
         """Create Child Widgets of Namespaces."""
         #self.id = id
-        contenedor = Container()
         cabecera = Static("Namespaces")
         cabecera.styles.text_align = "center"
+        cabecera.styles.background = "steelblue"
+        
+        contenedor = Container()
         contenedor.mount(cabecera)
         
         ns = get_namespaces()
@@ -24,7 +26,7 @@ class NamespacesWidget(Static):
 
         yield contenedor
 
-class PodsWidgets(Static):
+class PodsWidget(Static):
     """A Pods Widget."""""
 
     def compose(self) -> ComposeResult:
@@ -32,6 +34,7 @@ class PodsWidgets(Static):
         #self.id = id
         cabecera = Static("Pods")
         cabecera.styles.text_align = "center"
+        cabecera.styles.background = "palevioletred"
         
         self.contenedor = Container()
         self.contenedor.mount(cabecera)
@@ -47,6 +50,10 @@ class LogsWidget(Static):
 
     def compose(self) -> ComposeResult:
         self.log_container = Static()
+        cabecera = Static("Logs")
+        cabecera.styles.text_align = "center"
+        cabecera.styles.background = "darkslategray"
+        yield cabecera
         yield self.log_container
 
 
@@ -61,7 +68,7 @@ class KUIAppUI(App):
         yield Header()
         yield Footer()
         
-        self.podsWidget = PodsWidgets()
+        self.podsWidget = PodsWidget()
         self.logsWidget = LogsWidget() 
         
         yield Container(
@@ -107,7 +114,7 @@ class KUIAppUI(App):
 
             # Don´t forget to remove possible logs
             self.logsWidget.log_container.update()
-            
+
             # Create buttons with the corresponding associated namespaces. 
             # They have to be added to the Pods container.
 

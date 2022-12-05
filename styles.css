@@ -2,46 +2,27 @@ KUIAppUI {
     layout: horizontal;
 }
 
-PodsWidget {
-    content-align: center middle
-}
-
-#podsWidget {
-    dock: right
-}
-
-#namespacesMessage {
-    content-align: center middle;
-    text-style: bold
-}
-
 #main_window {
     layout: grid;
     grid-size: 3 1;
+    grid-columns: 2fr 4fr 8fr
 }
 
-#pods_widget {
-    border: solid red;
-}
-
-#logs_widget {
-    border: solid green;
-}
-
-#namespaces_widget {
-    border: solid blue;
-
-}
-
-#pods_widget_header {
-    layout: horizontal;
+PodsWidget {
     content-align: center middle;
-    height: 3;
-}
-/*
-
-#pods_row_container{
-    
+    border: palevioletred
 }
 
-*/
+NamespacesWidget {
+    border: steelblue	
+}
+
+LogsWidget {
+    border: darkslategrey;
+    text-align: center;
+
+}
+
+#button_namespaces {
+    background: bisque;
+}
