@@ -12,14 +12,18 @@ def get_namespaces() -> list:
     return ns
 
 
-def get_pods(contenedor: str) -> str:
-    raw_pods = subprocess.run(["kubectl", "get", "pods", "-n", contenedor], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
+def get_pods(namespace: str) -> str:
+    raw_pods = subprocess.run(["kubectl", "get", "pods", "-n", namespace], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
     pods = raw_pods.split("\n")
     pods = list(filter(None, pods))
     return pods    
 
-def get_pods_names(contenedor: str) -> list:
-    names = subprocess.run(["kubectl", "get", "pods", "-n", contenedor, "--no-headers", "-o", "custom-columns=:metadata.name"], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
+def get_pods_names(namespace: str) -> list:
+    names = subprocess.run(["kubectl", "get", "pods", "-n", namespace, "--no-headers", "-o", "custom-columns=:metadata.name"], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
     names = names.split("\n")
     names = list(filter(None, names))
     return names
+
+def get_logs(namespace: str, pods: str) -> str :
+    logs = subprocess.run(["kubectl", "logs", pods, "-n", namespace], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
+    return logs

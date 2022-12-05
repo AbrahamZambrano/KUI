@@ -6,10 +6,10 @@ from textual.widgets import Button, Header, Footer, Static
 from subprocess import PIPE
 
 class NamespacesWidget(Static):
-    """A Namespaces widget."""
+    """A Namespaces Widget."""
 
     def compose(self, id = None, *args, **kwargs) -> ComposeResult:
-        """Create child widgets of namespaces."""
+        """Create Child Widgets of Namespaces."""
         #self.id = id
         contenedor = Container()
         cabecera = Static("Namespaces")
@@ -24,12 +24,11 @@ class NamespacesWidget(Static):
 
         yield contenedor
 
-
 class PodsWidgets(Static):
-    """A Pods widget."""""
+    """A Pods Widget."""""
 
     def compose(self) -> ComposeResult:
-        """Create child widgets of pods."""
+        """Create Child Widgets of Pods."""
         #self.id = id
         cabecera = Static("Pods")
         cabecera.styles.text_align = "center"
@@ -40,10 +39,15 @@ class PodsWidgets(Static):
         yield self.contenedor
 
 
-
 class LogsWidget(Static):
+    """A Logs Widget"""
+
     container = ""
     pod = ""
+
+    def compose(self) -> ComposeResult:
+        self.log_container = Static()
+        yield self.log_container
 
 
 class KUIAppUI(App):
@@ -51,7 +55,6 @@ class KUIAppUI(App):
 
     BINDINGS = [("d", "toggle_dark", "Toggle dark mode"),("q", "button_exit", "Exit"),("p","new_plots", "Plots"),("t","new_terminal","New Terminal")]
     CSS_PATH = "../styles.css"
-
 
     def compose(self) -> ComposeResult:
         """Create child widgets for the app."""
@@ -90,28 +93,39 @@ class KUIAppUI(App):
         """Event handler called when a button is pressed."""
         button_type = event.button.name
 
-        if button_type == "btn_namespace":
-            button_label = event.button.id
-            namespaces = get_pods_names(button_label)
+        #Namespaces
+        if button_type == Config.NAMESPACE_BUTTON_NAME:
+            ns = event.button.id
+            
+            self.last_clicked_namespace = ns
+
+            pods = get_pods_names(ns)
 
             # Clean any already existing buttons on the container
             for widget in self.podsWidget.contenedor.query("Button"):
                 widget.remove()
 
+            # Don´t forget to remove possible logs
+            self.logsWidget.log_container.update()
+            
             # Create buttons with the corresponding associated namespaces. 
             # They have to be added to the Pods container.
 
-            for pod_name in namespaces:
+            for pod_name in pods:
                 self.podsWidget.contenedor.mount(
-                    Button(label=pod_name)
+                    Button(label=pod_name, id=pod_name, name=Config.PODS_BUTTON_NAME)
                 )
 
-            
+        #Logs
+        if button_type == Config.PODS_BUTTON_NAME :
+            pod = event.button.id
+            logs = get_logs(self.last_clicked_namespace, pod)
+            self.logsWidget.log_container.update(logs)
+
 
 
 if __name__ == "__main__":
     get_pods_names("")
-    app = KUIAppUI()
-    
+    app = KUIAppUI()    
     app.run()
     
