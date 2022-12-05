@@ -26,7 +26,6 @@ PodsWidget {
 
 #logs_widget {
     border: solid green;
-    width: 20%;
 }
 
 #namespaces_widget {

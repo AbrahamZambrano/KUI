@@ -22,38 +22,25 @@ class NamespacesWidget(Static):
         yield contenedor
 
 
-#class PodRow(Static):
-#    def compose() -> ComposeResult:
-#        yield Button("coredns-565d847f94-4rspf")
-#        yield Static("1/1")
-#        yield Static("Running")
-#        yield Static("8 (68m ago)")
-#        yield Static("11d")
-
-
-
-
 class PodsWidgets(Static):
     """A Pods widget."""""
+
     def compose(self, id = None, *args, **kwargs) -> ComposeResult:
-        self.headers = Container(
-            Static("NAME"),
-            Static("READY"),
-            Static("STATUS"),
-            Static("RESTARTS"), 
-            Static("AGE"),
-            id = "pods_widget_header"
-        )
-        self.pods_rows = Container(
-            # Los pods que tengas en total
-            # PodRow(),
-            
-        )
+        """Create child widgets of pods."""
+        #self.id = id
+        contenedor = Container()
+        contenedor.mount(Static("Pods"))
 
-        yield Container(self.headers, self.pods_rows,
-        )
+        for pod in get_namespaces():
+            ps = get_pods_names(pod)
+            for pods in ps:
+                btn = Button(pods, id=pods, classes=KUIAppUI.PODS_BUTTON_CLASS)
+                btn.styles.visibility = "hidden"
+                contenedor.mount(
+                    btn
+                )
 
-
+        yield contenedor
 
 
 class LogsWidget(Static):
@@ -66,7 +53,7 @@ class KUIAppUI(App):
     BINDINGS = [("d", "toggle_dark", "Toggle dark mode"),("e", "button_exit", "Exit"),("p","new_plots", "Plots"),("t","new_terminal","New Terminal")]
     CSS_PATH = "../styles.css"
     NAMESPACE_BUTTON_CLASS = "button_namespaces"
-    PODS_BUTTON_CLAS = "button_pods"
+    PODS_BUTTON_CLASS = "button_pods"
 
 
     def compose(self) -> ComposeResult:
@@ -107,7 +94,7 @@ class KUIAppUI(App):
         id = event.button.id
 
         if KUIAppUI.NAMESPACE_BUTTON_CLASS in event.button.classes:
-            pods = get_pods(id)
+            pods = get_pods_names(id)
             #Converitr la lista en un string
             pods_list = ' '.join(map(str,pods))
             ########################################################
@@ -123,6 +110,6 @@ class KUIAppUI(App):
 if __name__ == "__main__":
     get_pods_names("")
     app = KUIAppUI()
-    namespace = NamespacesWidget()
+    
     app.run()
     
