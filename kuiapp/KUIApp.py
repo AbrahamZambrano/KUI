@@ -1,4 +1,5 @@
 from commands import *
+from config import Config
 from textual.app import App, ComposeResult
 from textual.containers import Container, Horizontal
 from textual.widgets import Button, Header, Footer, Static
@@ -11,12 +12,14 @@ class NamespacesWidget(Static):
         """Create child widgets of namespaces."""
         #self.id = id
         contenedor = Container()
-        contenedor.mount(Static("Namespaces"))
+        cabecera = Static("Namespaces")
+        cabecera.styles.text_align = "center"
+        contenedor.mount(cabecera)
         
         ns = get_namespaces()
         for namespace in ns:
             contenedor.mount(
-                Button(namespace, id=namespace, classes=KUIAppUI.NAMESPACE_BUTTON_CLASS)
+                Button(id=namespace, label=namespace, name=Config.NAMESPACE_BUTTON_NAME, classes=Config.NAMESPACE_BUTTON_CLASS)
             )
 
         yield contenedor
@@ -25,35 +28,29 @@ class NamespacesWidget(Static):
 class PodsWidgets(Static):
     """A Pods widget."""""
 
-    def compose(self, id = None, *args, **kwargs) -> ComposeResult:
+    def compose(self) -> ComposeResult:
         """Create child widgets of pods."""
         #self.id = id
-        contenedor = Container()
-        contenedor.mount(Static("Pods"))
+        cabecera = Static("Pods")
+        cabecera.styles.text_align = "center"
+        
+        self.contenedor = Container()
+        self.contenedor.mount(cabecera)
+        
+        yield self.contenedor
 
-        for pod in get_namespaces():
-            ps = get_pods_names(pod)
-            for pods in ps:
-                btn = Button(pods, id=pods, classes=KUIAppUI.PODS_BUTTON_CLASS)
-                btn.styles.visibility = "hidden"
-                contenedor.mount(
-                    btn
-                )
-
-        yield contenedor
 
 
 class LogsWidget(Static):
     container = ""
     pod = ""
 
+
 class KUIAppUI(App):
     """A Textual app to manage stopwatches."""
 
-    BINDINGS = [("d", "toggle_dark", "Toggle dark mode"),("e", "button_exit", "Exit"),("p","new_plots", "Plots"),("t","new_terminal","New Terminal")]
+    BINDINGS = [("d", "toggle_dark", "Toggle dark mode"),("q", "button_exit", "Exit"),("p","new_plots", "Plots"),("t","new_terminal","New Terminal")]
     CSS_PATH = "../styles.css"
-    NAMESPACE_BUTTON_CLASS = "button_namespaces"
-    PODS_BUTTON_CLASS = "button_pods"
 
 
     def compose(self) -> ComposeResult:
@@ -61,8 +58,8 @@ class KUIAppUI(App):
         yield Header()
         yield Footer()
         
-        self.podsWidget = PodsWidgets("Pods", id="pods_widget")
-        self.logsWidget = LogsWidget("Logs", id="logs_widget") 
+        self.podsWidget = PodsWidgets()
+        self.logsWidget = LogsWidget() 
         
         yield Container(
             NamespacesWidget(renderable="namespaces", id = "namespaces_widget"), 
@@ -91,20 +88,25 @@ class KUIAppUI(App):
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         """Event handler called when a button is pressed."""
-        id = event.button.id
+        button_type = event.button.name
 
-        if KUIAppUI.NAMESPACE_BUTTON_CLASS in event.button.classes:
-            pods = get_pods_names(id)
-            #Converitr la lista en un string
-            pods_list = ' '.join(map(str,pods))
-            ########################################################
-            self.podsWidget.pods_rows.add_class("remove")
-            self.podsWidget.pods_rows.mount(Container(
-                Static(pods_list), 
-                id = "pods_row_container"
-            )
-        )
+        if button_type == "btn_namespace":
+            button_label = event.button.id
+            namespaces = get_pods_names(button_label)
 
+            # Clean any already existing buttons on the container
+            for widget in self.podsWidget.contenedor.query("Button"):
+                widget.remove()
+
+            # Create buttons with the corresponding associated namespaces. 
+            # They have to be added to the Pods container.
+
+            for pod_name in namespaces:
+                self.podsWidget.contenedor.mount(
+                    Button(label=pod_name)
+                )
+
+            
 
 
 if __name__ == "__main__":

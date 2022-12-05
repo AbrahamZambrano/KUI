@@ -18,7 +18,7 @@ def get_pods(contenedor: str) -> str:
     pods = list(filter(None, pods))
     return pods    
 
-def get_pods_names(contenedor: str) -> str:
+def get_pods_names(contenedor: str) -> list:
     names = subprocess.run(["kubectl", "get", "pods", "-n", contenedor, "--no-headers", "-o", "custom-columns=:metadata.name"], stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode('utf-8')
     names = names.split("\n")
     names = list(filter(None, names))

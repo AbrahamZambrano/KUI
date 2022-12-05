@@ -11,8 +11,9 @@ kuiapp = "textual run kuiapp/KUIApp.py"
 [tool.poetry.dependencies]
 python = "^3.7"
 rich = "*"
-textual = "^0.2.1"
+textual = "^0.5"
 typing-extensions = "*"
+taskipy = "*"
 
 [tool.poetry.dev-dependencies]
 
