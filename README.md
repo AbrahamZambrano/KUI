@@ -118,7 +118,7 @@ Para hacer los commandos desde el WSL tengo que utilizar service.
     - service docker start/status/stop/restart
     - docker info 
 
-- Intalacion go [aquí](https://tecadmin.net/how-to-install-go-on-ubuntu-20-04/).
+- Instalacion go [aquí](https://tecadmin.net/how-to-install-go-on-ubuntu-20-04/).
 
 - Comandos para clusters [aquí](https://kind.sigs.k8s.io/).
   
