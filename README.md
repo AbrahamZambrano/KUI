@@ -143,7 +143,7 @@ Dividiendo el código en clases
 
 - Dia 05/11/2022
 
-[Inmplementando los botones a los namespaces](img/botones.png)
+![Inmplementando los botones a los namespaces](img/botones.png)
 
 Buscando informacion de como guardar la iformacion de los botones
 
@@ -175,7 +175,7 @@ Implementando estilos a los namespaces
   
   Comienzo de nuevo la app y encuentro los fallos que me estaba dando 😊
 
-  [El principio](img/1.jpeg)
+  ![El principio](img/1.jpeg)
 
   Sigo con el curso de Python para poder continuar con la app, ya que se esta complicando la cosa
 
@@ -185,7 +185,7 @@ Implementando estilos a los namespaces
 
   Sigo desarrollando....
 
-  [Sigo dandole vueltas a la cabeza](img/2.jpeg)
+  ![Sigo dandole vueltas a la cabeza](img/2.jpeg)
 
   Comienzo un curso de Docker
 
@@ -254,4 +254,4 @@ Buscando informacion de como abrir otra terminal mediante comandos
 
   🎊¡Ya esta todo acabado!🎊
 
-  [Video de KUI en acción](img/Animation4.gif)
+  ![Video de KUI en acción](img/Animation4.gif)
