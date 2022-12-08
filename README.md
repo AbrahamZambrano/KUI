@@ -1,5 +1,10 @@
 # KUI App (Kubernetes User Interface)
 
+## Documentación 📖
+
+[Documentacion](2ASIR_B_FERRER_ZAMBRANO_ABRAHAM_KUI.pdf)
+
+---
 
 ## Instalaciones 💻
 
@@ -129,3 +134,124 @@ Comandos [kubectl](https://geekflare.com/es/kubectl-examples/).
 Configuracion [Kind](https://kind.sigs.k8s.io/docs/user/configuration/).
 
 
+- Dia 03/11/2022
+
+Buscando informacion de como realizar las graficas 
+
+Dividiendo el código en clases
+
+
+- Dia 05/11/2022
+
+[Inmplementando los botones a los namespaces](img/botones.png)
+
+Buscando informacion de como guardar la iformacion de los botones
+
+- Dia 06/11/2022
+
+Creo la hoja de estilos y sigo pensando en la estructura de la aplicacion
+
+- Dia 08/11/2022
+
+Estudiando la libreria [Textual](https://github.com/Textualize/textual) 
+
+- Dia 10/11/2022
+
+Implementando el modo oscuro a la aplicación
+
+Solucionando fallos con las depedencias del WSL 
+
+- Dia 15/11/2022
+
+Implementando estilos al footer 
+
+Implementando estilos a los namespaces 
+
+- Dia 16/11/2022
+  
+  Se ha roto la app, tengo que volver a empezar desde 0 😭😭
+
+- Dia 17/11/2022
+  
+  Comienzo de nuevo la app y encuentro los fallos que me estaba dando 😊
+
+  [El principio](img/1.jpeg)
+
+  Sigo con el curso de Python para poder continuar con la app, ya que se esta complicando la cosa
+
+  Comienzo un curso de CSS para poder mejorar la hoja de estilos
+
+- Dia 20/11/2022
+
+  Sigo desarrollando....
+
+  [Sigo dandole vueltas a la cabeza](img/2.jpeg)
+
+  Comienzo un curso de Docker
+
+- Dia 22/11/2022
+
+Implementando los Pods, con sus respectivos botones 
+
+Implementando estilos a los Pods
+
+Solucionando fallos con el WSL
+
+Buscando informacion de como abrir otra terminal mediante comandos
+
+- Dia 23/11/2022
+
+  Buscando informacion sobre los subprocesos
+
+  Implementando los comandos 
+
+- Dia 25/11/2022
+
+  Solucionando errores con los pods
+
+  No funcionan los botones de Pods 😭
+
+- Dia 29/11/2022
+
+  Arreglando posibles fallos al conectarse con los Dockers
+
+  Soluciono los botones :)
+
+- Dia 01/12/2022
+
+  Implemento los logs
+
+- Dia 02/12/2022
+
+    Implemento los Plots
+
+    Configuro los Plots para que coja os recursos de los contenedores 
+
+    He conseguido que se muestre en directo y si se produce un cambio se actualize 
+
+- Dia 03/12/2022
+
+  Comienzo la documentación del proyecto
+
+- Dia 05/12/2022
+
+  Termino la funcionalidades de la app
+
+  Retoco los estilos 
+
+- Dia 06/12/2022
+
+  Termino los estilos 
+
+  Sigo con la documentación
+- Dia 07/11/2022
+
+  Termino la documentación 
+
+  Comienzo con la presentacion y la defensa del proyecto
+
+- Dia 08/11/2022
+
+  🎊¡Ya esta todo acabado!🎊
+
+  [Video de KUI en acción](img/Animation4.gif)
